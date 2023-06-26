@@ -1,0 +1,44 @@
+---
+title: Curriculum Vitae, summer
+name: Jeonghun
+surname: Park
+position: "Graduate school student"
+address: "Chinese Language and Literature, School of Humanities, Seoul National University"
+pronouns: he/him
+phone: +82 10 2608 4471
+email: "ph0097@hanyang.ac.kr"
+github: jhenghun
+linkedin: jhenghun
+date: "`r format(Sys.time(), '%B %Y')`"
+output:
+  vitae::markdowncv:
+    theme: kjhealy
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+## Education
+
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "BA in Chinese Language and Literature", "2019-2023", "Hanyang University", "Seoul, Korea",
+  "BA in Chinese Literature", "2020-2024", "National Taiwan University", "Taipei, Taiwan",
+  "MA in Chinese Language and Literature", "2023-", "Seoul National University", "Seoul, Korea"
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
+```
+
+## Publications
+
+```{r}
+library(dplyr)
+knitr::write_bib(c("vitae", "tibble"), "packages.bib")
+
+bibliography_entries("packages.bib") %>%
+  arrange(desc(author$family), issued)
+```
