@@ -1,30 +1,43 @@
 ---
-title: "Untitled"
-author: "jeonghunp"
-date: "2023-05-23"
-output: html_document
+name: Jeonghun
+surname: Park
+position: "Graduate school student"
+address: "Chinese Language and Literature, School of Humanities, Seoul National University"
+pronouns: he/him
+phone: +82 10 2608 4471
+www: none
+email: "ph0097@hanyang.ac.kr"
+twitter: none
+github: jhenghun
+linkedin: jhenghun
+date: "`r format(Sys.time(), '%B %Y')`"
+output: vitae::hyndman
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
 ```
 
-## R Markdown
+# Education
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+library(tibble)
+tribble(
+  ~ Degree, ~ Year, ~ Institution, ~ Where,
+  "BA in Chinese Language and Literature", "2019-2023", "Hanyang University", "Seoul, Korea",
+  "BA in Chinese Literature", "2020-2024", "National Taiwan University", "Taipei, Taiwan",
+  "MA in Chinese Language and Literature", "2023-", "Seoul National University", "Seoul, Korea"
+) %>% 
+  detailed_entries(Degree, Year, Institution, Where)
 ```
 
-## Including Plots
+# Publications
 
-You can also embed plots, for example:
+```{r}
+library(dplyr)
+knitr::write_bib(c("vitae", "tibble"), "packages.bib")
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+bibliography_entries("packages.bib") %>%
+  arrange(desc(author$family), issued)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
